@@ -1,7 +1,7 @@
 ## Helper Functions 
+import face_recognition
 
 def extract_photo_descriptors(image_path):
-    import face_recognition
 
     # Create an encoding of facial features that can be compared to other faces
     picture = face_recognition.load_image_file(file=image_path)
