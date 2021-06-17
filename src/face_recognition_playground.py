@@ -1,16 +1,13 @@
 import face_recognition
 from PIL import Image, ImageDraw
 
-
-
-# Load the jpg file into a numpy array
-image = face_recognition.load_image_file("data/actors/Anne Hathaway/Anne Hathaway_46.jpg")
+## Load the jpg file into a numpy array
+image = face_recognition.load_image_file("data/query_images/me.png")
 
 
 
-# Find all facial features in all the faces in the image
+## 1. Find all facial features in all the faces in the image
 face_landmarks_list = face_recognition.face_landmarks(image)
-
 print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
 
 # Create a PIL imagedraw object so we can draw on the picture
@@ -31,7 +28,7 @@ for face_landmarks in face_landmarks_list:
 pil_image.show()
 
 
-## Face Location
+## 2. Face Location
 
 face_locations = face_recognition.face_locations(image)
 face_locations
@@ -46,3 +43,36 @@ for face_location in face_locations:
     face_image = image[top:bottom, left:right]
     pil_image = Image.fromarray(face_image)
     pil_image.show()
+
+
+
+## 3. Draw box to Face location
+
+# Find all the faces and face encodings in the unknown image
+face_locations = face_recognition.face_locations(image)
+
+# Convert the image to a PIL-format image so that we can draw on top of it with the Pillow library
+# See http://pillow.readthedocs.io/ for more about PIL/Pillow
+pil_image = Image.fromarray(image)
+
+# Create a Pillow ImageDraw Draw instance to draw with
+draw = ImageDraw.Draw(pil_image)
+
+# Loop through each face found in the unknown image
+for (top, right, bottom, left) in face_locations:
+
+    # Draw a box around the face using the Pillow module
+    draw.rectangle(((left, top), (right, bottom)), outline=(0, 0, 255))
+
+    # Draw a label with a name below the face
+    text_width, text_height = draw.textsize("Face")
+    # draw.rectangle(((left, bottom - text_height - 20), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
+    draw.rectangle(((left, bottom-10), (right, bottom)), fill=(0, 0, 255), outline=(0, 0, 255))
+    draw.text((left + 6, bottom - text_height - 5), "Face", fill=(255, 255, 255, 255))
+
+
+# Remove the drawing library from memory as per the Pillow docs
+del draw
+
+# Display the resulting image
+pil_image.show()

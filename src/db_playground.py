@@ -3,7 +3,6 @@ import psycopg2
 import psycopg2.extras
 
 import pandas as pd
-import numpy as np
 
 # SQL Queries
 
