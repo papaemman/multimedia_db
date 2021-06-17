@@ -1,4 +1,0 @@
--- RUN SIMPLE QUERIES --
-
-SELECT * 
-FROM customers
