@@ -23,11 +23,17 @@
 
 ## Information Retrieval System
 
-Input Image:
+Return the top-k images with most similar faces, given a single image, as search query.
 
-Output Images:
+**Input Image:**
 
-Check more examples here: <data/query_images>
+<img src="data/query_images/jennifer_aniston.jpeg">
+
+**Output Collage:**
+
+<img src="data/collages/jennifer_aniston_collage_top6.png">
+
+Check more **input images** [here](data/query_images/) and their **topk query collages** [here](data/collages/).
 
 <br>
 
